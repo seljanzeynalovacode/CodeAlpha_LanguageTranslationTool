@@ -47,8 +47,8 @@ TranslationTool/
 1. **Clone the repository:**
 
 ```bash
-   git clone https://github.com/your-username/translation-tool-backend.git
-   cd translation-tool-backend
+   git clone https://github.com/seljanzeynalovacode/CodeAlpha_LanguageTranslationTool.git
+   cd CodeAlpha_LanguageTranslationTool/Backend/TranslationTool
 ```
 
 2. **Configure Environment Settings:**
