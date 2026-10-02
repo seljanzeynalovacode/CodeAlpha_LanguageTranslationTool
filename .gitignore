@@ -1,0 +1,17 @@
+.vs/
+*.user
+*.suo
+bin/
+obj/
+.vscode/
+*.log
+.env
+.env.*
+.claude/
+**/.claude/
+node_modules/
+dist/
+appsettings.json
+appsettings.Development.json
+Logs/
+logs/
