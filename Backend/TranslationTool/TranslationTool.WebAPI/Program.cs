@@ -20,15 +20,15 @@ builder.Services.AddHttpClient<GoogleTranslateProvider>(client =>
 
 builder.Services.AddScoped<ITranslationProvider>(sp => sp.GetRequiredService<GoogleTranslateProvider>());
 
-// Service Qatı Registrasiyası
+
 builder.Services.AddScoped<ITranslationService, TranslationService>();
 
-// CORS Politikası: Test üçün tam açıq vəziyyətə gətirildi (AllowAll)
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()   // İstənilən portdan (5500, 5501, 3000 və s.) gələn sorğuya icazə verir
+        policy.AllowAnyOrigin()   
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
