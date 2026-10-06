@@ -1,28 +1,37 @@
-# 🌐 Multi-Language Translation API Service
+# 🌐 Multi-Language Translation API & Web App
 
-A modern, scalable backend service built with **ASP.NET Core (Clean Architecture)** that provides seamless multi-language translation using external API providers. Designed with developer-friendly patterns, robust global error handling, and ready for frontend integration.
+A modern, enterprise-grade translation solution featuring a scalable backend built with **ASP.NET Core (Clean Architecture)** and a responsive, premium **Frontend (Tailwind CSS)** supporting Dark/Light mode switching, text-to-speech, and clipboard utilities.
 
 ---
 
-## ✨ Features
+## ✨ Features & Technologies Used
 
-- **Clean Architecture & SOLID Principles**: Decoupled domain, application, infrastructure, and API layers for maximum maintainability.
-- **Dependency Injection & Options Pattern**: Clean separation of configurations using strongly typed options (`appsettings.json`).
+### 🛠️ Backend (.NET Web API)
+- **Clean Architecture & SOLID Principles**: Decoupled domain, application, infrastructure, and API layers for maximum maintainability and testability.
+- **Dependency Injection & Options Pattern**: Clean configuration management using strongly typed options (`appsettings.json`).
 - **Resilient HTTP Communication**: Utilizes `HttpClientFactory` for efficient API consumption and memory management.
-- **Global Error Handling**: Custom middleware capturing exceptions gracefully with detailed debugging outputs in development.
-- **CORS Support**: Pre-configured to allow smooth cross-origin integration with frontend applications (e.g., Live Server).
+- **Global Error Handling**: Custom middleware capturing exceptions gracefully with detailed error responses.
+- **CORS Support**: Pre-configured cross-origin resource sharing for seamless frontend-backend communication.
 - **Interactive API Documentation**: Embedded Swagger UI for real-time endpoint testing and schema inspection.
+
+### 🎨 Frontend (HTML / CSS / JavaScript)
+- **Modern B2B UI/UX**: Designed with **Tailwind CSS** featuring Glassmorphism effects and soft gradients.
+- **Dark & Light Mode**: Fully integrated theme switcher with user preference persistence using `localStorage`.
+- **Enhanced Usability**: 
+  - Instant text translation via .NET API integration.
+  - One-click **Clipboard Copy** functionality.
+  - **Text-to-Speech (TTS)** feature using the Web Speech API.
+  - Native browser **Spellcheck** support (`spellcheck="true"`).
+  - Responsive layout optimized for all screen sizes.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: .NET 8 / .NET 9 Web API
-- **Language**: C#
-- **Architecture**: Clean Architecture
-- **API Provider**: Top Google Translate (RapidAPI)
+- **Backend**: .NET 8 / .NET 9 Web API, C#, Clean Architecture
+- **Frontend**: HTML5, JavaScript (ES6+), Tailwind CSS, FontAwesome
+- **API Provider**: Google Translate (RapidAPI)
 - **Documentation**: Swagger / OpenAPI
-- **Serialization**: System.Text.Json
 
 ---
 
@@ -30,30 +39,37 @@ A modern, scalable backend service built with **ASP.NET Core (Clean Architecture
 
 ```text
 TranslationTool/
-├── TranslationTool.Domain/        # Core business models & entities
-├── TranslationTool.Application/   # Interfaces, DTOs & service definitions
-├── TranslationTool.Infrastructure/# External API provider integrations & HttpClient setup
-└── TranslationTool.WebAPI/        # Controllers, Middlewares, DI configuration & AppSettings
-````
+├── Backend/
+│   ├── TranslationTool.Domain/        # Core business models & entities
+│   ├── TranslationTool.Application/   # Interfaces, DTOs & service definitions
+│   ├── TranslationTool.Infrastructure/# External API provider integrations & HttpClient setup
+│   └── TranslationTool.WebAPI/        # Controllers, Middlewares, DI configuration & AppSettings
+└── Frontend/
+    ├── index.html                     # Premium B2B User Interface (Dark/Light mode support)
+    ├── style.css                      # Custom styles, animations & custom scrollbar
+    └── script.js                      # API integration, Text-to-Speech & Clipboard logic
+```
+
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - .NET SDK (Version 8.0 or higher)
 - A RapidAPI account with an active key for **Top Google Translate**.
+- Live Server (or any static local server) to run the frontend.
 
 ### Installation & Setup
 
 1. **Clone the repository:**
 
 ```bash
-   git clone https://github.com/seljanzeynalovacode/CodeAlpha_LanguageTranslationTool.git
-   cd CodeAlpha_LanguageTranslationTool/Backend/TranslationTool
+   git clone https://github.com/seljanzeynalovacode/CodeAlpha_LanguageTranslationTool
+   cd CodeAlpha_LanguageTranslationTool
 ```
 
-2. **Configure Environment Settings:**
+2. **Configure Backend Environment Settings:**
 
-   Update your `appsettings.json` or `appsettings.Development.json` with your RapidAPI credentials:
+   Navigate to the backend configuration and update your `appsettings.json` or `appsettings.Development.json` with your RapidAPI credentials:
 
 ```json
    {
@@ -64,38 +80,31 @@ TranslationTool/
    }
 ```
 
-3. **Build the Project:**
+3. **Run the Backend (.NET Web API):**
 
 ```bash
-   dotnet build
+   cd Backend/TranslationTool/TranslationTool.WebAPI
+   dotnet run
 ```
 
-4. **Run the Application:**
+   *(The API will run on `https://localhost:7104`)*
 
-```bash
-   dotnet run --project TranslationTool.WebAPI
-```
+4. **Run the Frontend:**
 
-5. **Access Swagger UI:**
-
-   Open your browser and navigate to:
-
-```
-   https://localhost:7084/swagger
-```
+   Open the `Frontend/index.html` file using Live Server in VS Code. Make sure the API base URL in `script.js` matches your running backend port (`https://localhost:7104/api/Translation`).
 
 ## 📌 API Endpoints
 
 ### Post Translation Request
 
-- **Endpoint:** `POST /api/translation`
+- **Endpoint:** `POST /api/Translation`
 - **Content-Type:** `application/json`
 
 #### Request Body
 
 ```json
 {
-  "text": "salam necesen men backend developer kimi isleyirem",
+  "text": "salam necesen",
   "sourceLanguage": "az",
   "targetLanguage": "en"
 }
@@ -105,20 +114,8 @@ TranslationTool/
 
 ```json
 {
-  "translatedText": "Hello how are you I work as a backend developer",
+  "translatedText": "Hello how are you",
   "sourceLanguage": "az",
   "targetLanguage": "en"
 }
 ```
-
-## 🗺️ Roadmap & Upcoming Features
-
-- [x] **Backend (.NET Web API)** — Completed
-  - [x] Clean Architecture setup
-  - [x] Integration with Google Translate RapidAPI
-  - [x] Custom exception middleware & DTO validation
-  - [x] CORS configuration for frontend clients
-- [ ] **Frontend Application** — In Progress
-  - [ ] Interactive User Interface for text input & selection
-  - [ ] Real-time translation input debounce
-  - [ ] Language selection dropdowns with auto-detection options
