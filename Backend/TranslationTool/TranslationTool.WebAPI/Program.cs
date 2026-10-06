@@ -23,14 +23,14 @@ builder.Services.AddScoped<ITranslationProvider>(sp => sp.GetRequiredService<Goo
 // Service Qatı Registrasiyası
 builder.Services.AddScoped<ITranslationService, TranslationService>();
 
-// CORS Politikası
+// CORS Politikası: Test üçün tam açıq vəziyyətə gətirildi (AllowAll)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Frontend", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("http://127.0.0.1:5500", "http://localhost:5500")
-       .AllowAnyHeader()
-.AllowAnyMethod();
+        policy.AllowAnyOrigin()   // İstənilən portdan (5500, 5501, 3000 və s.) gələn sorğuya icazə verir
+              .AllowAnyHeader()
+              .AllowAnyMethod();
     });
 });
 
@@ -43,7 +43,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseCors("Frontend");
+
+// Yaratdığımız AllowAll siyasətini tətbiq edirik
+app.UseCors("AllowAll");
+
 app.MapControllers();
 
 app.Run();
